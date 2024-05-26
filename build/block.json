@@ -17,17 +17,44 @@
       "background": false,
       "text": true
     },
-    "html": false,
-    "typography": {
-      "fontSize": true
-    }
+    "html": false
   },
   "attributes": {
-    "showStartingYear": {
-      "type": "boolean"
+    "tab1Image": {
+      "type": "integer"
     },
-    "startingYear": {
+    "tab1ImageUrl": {
       "type": "string"
+    },
+    "tab1Title": {
+      "type": "string",
+      "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    "tab1Description": {
+      "type": "string",
+      "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries."
+    },
+    "tab1Link": {
+      "type": "string",
+      "default": "https://wordpress.org/"
+    },
+    "tab2Image": {
+      "type": "integer"
+    },
+    "tab2ImageUrl": {
+      "type": "string"
+    },
+    "tab2Title": {
+      "type": "string",
+      "default": "There are many variations of passages of Lorem Ipsum available."
+    },
+    "tab2Description": {
+      "type": "string",
+      "default": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages."
+    },
+    "tab2Link": {
+      "type": "string",
+      "default": "https://wordpress.org/"
     }
   },
   "textdomain": "custom-tab-block",
