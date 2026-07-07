@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name:       Custom Tab Block
- * Description:       Example block scaffolded with Create Block tool.
+ * Description:       A custom Gutenberg block that displays tabbed content with image backgrounds, accessible keyboard navigation, and ARIA support.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Version:           0.2.0
+ * Author:            Mainul Hassan
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       custom-tab-block

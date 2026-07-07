@@ -1,8 +1,8 @@
 {
 	"name": "custom-tab-block",
-	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"version": "0.2.0",
+	"description": "A custom Gutenberg block that displays tabbed content with image backgrounds and accessible keyboard navigation.",
+	"author": "Mainul Hassan",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
@@ -15,11 +15,6 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-		"@wordpress/components": "^27.6.0",
-		"@wordpress/element": "^5.35.0",
 		"@wordpress/scripts": "^27.9.0"
-	},
-	"dependencies": {
-		"@10up/block-components": "^1.18.1"
 	}
 }

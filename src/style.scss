@@ -1,61 +1,81 @@
-.wp-block-create-block-custom-tab-block {
-	.__images {
+.custom-tab-block {
+	// Tablist: the two image triggers side by side.
+	&__tablist {
 		display: flex;
+	}
 
-		>button {
-			min-height: 20em;
-			text-align: center;
-			flex: 1;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			cursor: pointer;
-			border: none;
-			background: none;
-			border-radius: 0;
-			background-position: center;
-			background-size: cover;
-			background-repeat: no-repeat;
-			position: relative;
-			z-index: 111;
+	&__tab {
+		position: relative;
+		flex: 1;
+		min-height: 20em;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		cursor: pointer;
+		border: none;
+		border-radius: 0;
+		background-color: #ddd;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
 
-			&[aria-selected="true"] {
-				flex: 1.5;
-				background-color: #f5f5f5;
-				z-index: 1111;
-			}
+		&[aria-selected="true"] {
+			flex: 1.5;
+			background-color: #f5f5f5;
+		}
 
-			&:not([aria-selected="true"]) {
-				background-color: #ddd;
-			}
+		// Inset so an adjacent tab can't clip the focus ring.
+		&:focus {
+			outline-offset: -3px;
+		}
 
-			>span {
-				position: absolute;
-				right: 0;
-				bottom: 0;
-				background-color: #222;
-				color: #fff;
-				display: inline-block;
-				padding: 0px 14px;
-				font-size: 2.4em;
-				font-weight: bold;
-			}
+		// Dim inactive tabs so the active one stands out even when images are
+		// set (the active background colour is hidden behind the image, so the
+		// size difference alone isn't a strong enough cue).
+		&:not([aria-selected="true"])::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background-color: rgba(0, 0, 0, 0.25);
+			pointer-events: none;
 		}
 	}
 
-	.__content {
-		&.is-hidden {
+	// 01 / 02 number badge (above the inactive overlay so it stays legible).
+	&__tab-number {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		z-index: 1;
+		padding: 0 14px;
+		background-color: #222;
+		color: #fff;
+		font-size: 2.4em;
+		font-weight: 700;
+	}
+
+	// Content panels.
+	&__panel {
+
+		&--hidden {
 			display: none;
 		}
+	}
 
-		p {
-			margin: 2.5em 0 2em;
+	&__text {
+		margin: 2.5em 0 2em;
+	}
 
-			.__bold {
-				font-size: 1.6em;
-				font-weight: bold;
-				margin-right: 10px;
-			}
-		}
+	&__title {
+		margin-right: 10px;
+		font-size: 1.6em;
+		font-weight: 700;
+	}
+
+	// Sized to its content; the theme styles it via .wp-element-button.
+	&__button {
+		display: inline-block;
+		max-width: 100%;
 	}
 }
