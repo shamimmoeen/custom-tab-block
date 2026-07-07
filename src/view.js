@@ -1,105 +1,117 @@
-/* eslint-disable no-console */
-console.log("Hello World! (from create-block-custom-tab-block block)");
-/* eslint-enable no-console */
-
 class TabsAutomatic {
-	constructor(groupNode) {
-		this.tablistNode = groupNode;
+	constructor( tablistNode, instanceIndex ) {
+		this.tablistNode = tablistNode;
 
-		this.tabs = [];
+		// Pair panels to tabs by index and assign unique ids per instance so
+		// multiple blocks on one page stay independent.
+		const root = tablistNode.closest( '.custom-tab-block' );
+		this.tabs = Array.from(
+			tablistNode.querySelectorAll( '.custom-tab-block__tab' )
+		);
+		this.tabPanels = root
+			? Array.from( root.querySelectorAll( '.custom-tab-block__panel' ) )
+			: [];
 
 		this.firstTab = null;
 		this.lastTab = null;
 
-		this.tabs = Array.from(this.tablistNode.querySelectorAll("[role=tab]"));
-		this.tabPanels = [];
+		this.tabs.forEach( ( tab, i ) => {
+			const panel = this.tabPanels[ i ];
+			const tabId = `ctb-${ instanceIndex }-tab-${ i + 1 }`;
+			const panelId = `ctb-${ instanceIndex }-panel-${ i + 1 }`;
 
-		for (let i = 0; i < this.tabs.length; i += 1) {
-			var tab = this.tabs[i];
-			var tabpanel = document.getElementById(tab.getAttribute("aria-controls"));
-
+			tab.id = tabId;
 			tab.tabIndex = -1;
-			tab.setAttribute("aria-selected", "false");
-			this.tabPanels.push(tabpanel);
+			tab.setAttribute( 'aria-selected', 'false' );
 
-			tab.addEventListener("keydown", this.onKeydown.bind(this));
-			tab.addEventListener("click", this.onClick.bind(this));
+			if ( panel ) {
+				tab.setAttribute( 'aria-controls', panelId );
+				panel.id = panelId;
+				panel.setAttribute( 'aria-labelledby', tabId );
+			}
 
-			if (!this.firstTab) {
+			tab.addEventListener( 'keydown', this.onKeydown.bind( this ) );
+			tab.addEventListener( 'click', this.onClick.bind( this ) );
+
+			if ( ! this.firstTab ) {
 				this.firstTab = tab;
 			}
 			this.lastTab = tab;
-		}
+		} );
 
-		this.setSelectedTab(this.firstTab, false);
+		if ( this.firstTab ) {
+			this.setSelectedTab( this.firstTab, false );
+		}
 	}
 
-	setSelectedTab(currentTab, setFocus) {
-		if (typeof setFocus !== "boolean") {
+	setSelectedTab( currentTab, setFocus ) {
+		if ( typeof setFocus !== 'boolean' ) {
 			setFocus = true;
 		}
-		for (var i = 0; i < this.tabs.length; i += 1) {
-			var tab = this.tabs[i];
-			if (currentTab === tab) {
-				tab.setAttribute("aria-selected", "true");
-				tab.removeAttribute("tabindex");
-				this.tabPanels[i].classList.remove("is-hidden");
-				if (setFocus) {
+
+		this.tabs.forEach( ( tab, i ) => {
+			const panel = this.tabPanels[ i ];
+
+			if ( currentTab === tab ) {
+				tab.setAttribute( 'aria-selected', 'true' );
+				tab.removeAttribute( 'tabindex' );
+				if ( panel ) {
+					panel.classList.remove( 'custom-tab-block__panel--hidden' );
+				}
+				if ( setFocus ) {
 					tab.focus();
 				}
 			} else {
-				tab.setAttribute("aria-selected", "false");
+				tab.setAttribute( 'aria-selected', 'false' );
 				tab.tabIndex = -1;
-				this.tabPanels[i].classList.add("is-hidden");
+				if ( panel ) {
+					panel.classList.add( 'custom-tab-block__panel--hidden' );
+				}
 			}
+		} );
+	}
+
+	setSelectedToPreviousTab( currentTab ) {
+		if ( currentTab === this.firstTab ) {
+			this.setSelectedTab( this.lastTab );
+		} else {
+			const index = this.tabs.indexOf( currentTab );
+			this.setSelectedTab( this.tabs[ index - 1 ] );
 		}
 	}
 
-	setSelectedToPreviousTab(currentTab) {
-		var index;
-
-		if (currentTab === this.firstTab) {
-			this.setSelectedTab(this.lastTab);
+	setSelectedToNextTab( currentTab ) {
+		if ( currentTab === this.lastTab ) {
+			this.setSelectedTab( this.firstTab );
 		} else {
-			index = this.tabs.indexOf(currentTab);
-			this.setSelectedTab(this.tabs[index - 1]);
-		}
-	}
-
-	setSelectedToNextTab(currentTab) {
-		var index;
-
-		if (currentTab === this.lastTab) {
-			this.setSelectedTab(this.firstTab);
-		} else {
-			index = this.tabs.indexOf(currentTab);
-			this.setSelectedTab(this.tabs[index + 1]);
+			const index = this.tabs.indexOf( currentTab );
+			this.setSelectedTab( this.tabs[ index + 1 ] );
 		}
 	}
 
 	/* EVENT HANDLERS */
-	onKeydown(event) {
-		var tgt = event.currentTarget,
-			flag = false;
+	onKeydown( event ) {
+		const tgt = event.currentTarget;
+		let flag = false;
 
-		switch (event.key) {
-			case "ArrowLeft":
-				this.setSelectedToPreviousTab(tgt);
+		switch ( event.key ) {
+			case 'ArrowLeft':
+				this.setSelectedToPreviousTab( tgt );
 				flag = true;
 				break;
 
-			case "ArrowRight":
-				this.setSelectedToNextTab(tgt);
+			case 'ArrowRight':
+				this.setSelectedToNextTab( tgt );
 				flag = true;
 				break;
 
-			case "Home":
-				this.setSelectedTab(this.firstTab);
+			case 'Home':
+				this.setSelectedTab( this.firstTab );
 				flag = true;
 				break;
 
-			case "End":
-				this.setSelectedTab(this.lastTab);
+			case 'End':
+				this.setSelectedTab( this.lastTab );
 				flag = true;
 				break;
 
@@ -107,24 +119,22 @@ class TabsAutomatic {
 				break;
 		}
 
-		if (flag) {
+		if ( flag ) {
 			event.stopPropagation();
 			event.preventDefault();
 		}
 	}
 
-	onClick(event) {
-		this.setSelectedTab(event.currentTarget);
+	onClick( event ) {
+		this.setSelectedTab( event.currentTarget );
 	}
 }
 
-// Initialize tablist
-window.addEventListener("load", function () {
-	const tabLists = document.querySelectorAll(
-		"[role=tablist].__custom_tab_block_tablist",
-	);
+// Initialize every tab block on the page.
+window.addEventListener( 'load', function () {
+	const tabLists = document.querySelectorAll( '.custom-tab-block__tablist' );
 
-	for (let i = 0; i < tabLists.length; i++) {
-		new TabsAutomatic(tabLists[i]);
-	}
-});
+	tabLists.forEach( ( tabList, index ) => {
+		new TabsAutomatic( tabList, index );
+	} );
+} );

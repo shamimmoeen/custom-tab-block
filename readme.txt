@@ -1,55 +1,54 @@
 === Custom Tab Block ===
-Contributors:      The WordPress Contributors
-Tags:              block
-Tested up to:      6.1
-Stable tag:        0.1.0
+Contributors:      shamimmoeen
+Tags:              block, tabs, gutenberg, accessibility, aria
+Requires at least: 6.1
+Tested up to:      7.0
+Requires PHP:      7.0
+Stable tag:        0.2.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+A custom Gutenberg block that displays tabbed content with image backgrounds, accessible keyboard navigation, and ARIA support.
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Custom Tab Block adds a tabbed content block to the WordPress block editor. Each tab trigger can use an image as its background, and every tab panel has its own title, description, and "Read More" link, all editable from the block sidebar.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+The block implements the WAI-ARIA Authoring Practices tabs pattern, so it works with keyboard and assistive technologies out of the box.
+
+Features:
+
+* Image-backed tab triggers selected from the media library.
+* Accessible markup using role="tablist", role="tab", and role="tabpanel".
+* Keyboard navigation with Arrow Left/Right and Home/End keys.
+* Per-tab title, description, and link edited from the Inspector sidebar.
+* Translation ready.
+* Wide and full alignment support.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
 1. Upload the plugin files to the `/wp-content/plugins/custom-tab-block` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+3. Add the "Custom Tab Block" from the block inserter and configure each tab from the block settings sidebar.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Is the block keyboard accessible? =
 
-An answer to that question.
+Yes. Use the Arrow Left/Right keys to move between tabs, and Home/End to jump to the first or last tab.
 
-= What about foo bar? =
+= Can I use my own images on the tabs? =
 
-Answer to foo bar dilemma.
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+Yes. Each tab trigger can use an image selected from the WordPress media library as its background.
 
 == Changelog ==
 
+= 0.2.0 =
+* Image picker now uses core MediaUpload (removed the third-party @10up/block-components dependency).
+* BEM class names with a single shared markup component for editor/front-end parity.
+* Accessible tabs with per-instance unique IDs and a non-clipped keyboard focus ring.
+* Inactive tabs are dimmed so the active tab stands out.
+* Added vertical margin support; button and text inherit the theme's styling.
+
 = 0.1.0 =
-* Release
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+* Initial release.

@@ -2,20 +2,22 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "create-block/custom-tab-block",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Custom Tab Block",
   "category": "widgets",
   "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "description": "Accessible tabbed content with image-backed tabs.",
   "example": {},
   "supports": {
     "align": [
       "wide",
       "full"
     ],
-    "color": {
-      "background": false,
-      "text": true
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ]
     },
     "html": false
   },
