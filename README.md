@@ -7,6 +7,10 @@ A custom Gutenberg block for WordPress that displays tabbed content with image-b
 ![Block API](https://img.shields.io/badge/Block%20API-v3-blue)
 ![License](https://img.shields.io/badge/License-GPL--2.0--or--later-green)
 
+## Live demo
+
+**[▶ Try it live in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/shamimmoeen/custom-tab-block/master/_playground/blueprint.json)** — spins up a disposable WordPress in your browser with the plugin installed and a ready-made demo page showing the block in action.
+
 ## Features
 
 - 🎨 **Image-backed tabs** — pick an image from the media library for each tab trigger.
@@ -85,6 +89,13 @@ Only the active tab is in the tab order; arrow keys move focus between tabs, and
 
 - WordPress 6.1 or higher
 - PHP 7.0 or higher
+
+## Image Credits
+
+The demo images used in the [live preview](#live-demo) are free stock photos from [Pexels](https://www.pexels.com/):
+
+- **[Charming Mountain Chapel in the Dolomites](https://www.pexels.com/photo/charming-mountain-chapel-in-the-dolomites-36369882/)** — photo by Ivan Palchuk.
+- **[Bikes Parked by a River](https://www.pexels.com/photo/bikes-parked-by-a-river-26744424/)** — photo by Ersin.
 
 ## License
 
