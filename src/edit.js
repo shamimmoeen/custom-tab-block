@@ -15,10 +15,13 @@ import Tabs from './tabs';
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes } ) {
+	const tablistLabel = attributes.tablistLabel;
+
 	const selectImage = ( n ) => ( image ) =>
 		setAttributes( {
 			[ `tab${ n }Image` ]: image.id,
 			[ `tab${ n }ImageUrl` ]: image?.sizes?.full?.url || image.url,
+			[ `tab${ n }ImageAlt` ]: image.alt || '',
 		} );
 
 	const removeImage = ( n ) => () =>
@@ -30,9 +33,27 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<div { ...useBlockProps( { className: 'custom-tab-block' } ) }>
 			<InspectorControls>
+				<PanelBody
+					title={ __( 'Tab Group', 'custom-tab-block' ) }
+					initialOpen={ true }
+				>
+					<TextControl
+						label={ __( 'Group label', 'custom-tab-block' ) }
+						help={ __(
+							'Used by screen readers to describe this group of tabs.',
+							'custom-tab-block'
+						) }
+						value={ tablistLabel }
+						onChange={ ( v ) =>
+							setAttributes( { tablistLabel: v } )
+						}
+					/>
+				</PanelBody>
+
 				{ [ 1, 2 ].map( ( n ) => {
 					const image = attributes[ `tab${ n }Image` ];
 					const imageUrl = attributes[ `tab${ n }ImageUrl` ];
+					const imageAlt = attributes[ `tab${ n }ImageAlt` ];
 					const title = attributes[ `tab${ n }Title` ];
 					const description = attributes[ `tab${ n }Description` ];
 					const link = attributes[ `tab${ n }Link` ];
@@ -62,6 +83,10 @@ export default function Edit( { attributes, setAttributes } ) {
 												imageUrl ? (
 													<Button
 														className="custom-tab-block__image-preview"
+														label={ __(
+															'Replace image',
+															'custom-tab-block'
+														) }
 														onClick={ open }
 													>
 														<img
@@ -98,6 +123,25 @@ export default function Edit( { attributes, setAttributes } ) {
 									) }
 								</div>
 							</div>
+
+							{ imageUrl && (
+								<TextareaControl
+									label={ __(
+										'Image alt text (decorative if empty)',
+										'custom-tab-block'
+									) }
+									value={ imageAlt }
+									onChange={ ( value ) =>
+										setAttributes( {
+											[ `tab${ n }ImageAlt` ]: value,
+										} )
+									}
+									help={ __(
+										'Describe the image for screen readers, or leave empty if decorative.',
+										'custom-tab-block'
+									) }
+								/>
+							) }
 
 							<TextControl
 								__next40pxDefaultSize

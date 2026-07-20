@@ -22,7 +22,6 @@ class TabsAutomatic {
 
 			tab.id = tabId;
 			tab.tabIndex = -1;
-			tab.setAttribute( 'aria-selected', 'false' );
 
 			if ( panel ) {
 				tab.setAttribute( 'aria-controls', panelId );
@@ -56,16 +55,16 @@ class TabsAutomatic {
 				tab.setAttribute( 'aria-selected', 'true' );
 				tab.removeAttribute( 'tabindex' );
 				if ( panel ) {
-					panel.classList.remove( 'custom-tab-block__panel--hidden' );
+					panel.removeAttribute( 'hidden' );
 				}
 				if ( setFocus ) {
-					tab.focus();
+					tab.focus( { preventScroll: true } );
 				}
 			} else {
 				tab.setAttribute( 'aria-selected', 'false' );
 				tab.tabIndex = -1;
 				if ( panel ) {
-					panel.classList.add( 'custom-tab-block__panel--hidden' );
+					panel.setAttribute( 'hidden', '' );
 				}
 			}
 		} );
@@ -94,14 +93,26 @@ class TabsAutomatic {
 		const tgt = event.currentTarget;
 		let flag = false;
 
+		// Mirror the arrow keys in RTL so they follow the visual order.
+		const isRtl =
+			window.getComputedStyle( this.tablistNode ).direction === 'rtl';
+
 		switch ( event.key ) {
 			case 'ArrowLeft':
-				this.setSelectedToPreviousTab( tgt );
+				if ( isRtl ) {
+					this.setSelectedToNextTab( tgt );
+				} else {
+					this.setSelectedToPreviousTab( tgt );
+				}
 				flag = true;
 				break;
 
 			case 'ArrowRight':
-				this.setSelectedToNextTab( tgt );
+				if ( isRtl ) {
+					this.setSelectedToPreviousTab( tgt );
+				} else {
+					this.setSelectedToNextTab( tgt );
+				}
 				flag = true;
 				break;
 
