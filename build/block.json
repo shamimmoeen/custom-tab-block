@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "create-block/custom-tab-block",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "title": "Custom Tab Block",
   "category": "widgets",
   "icon": "smiley",
@@ -22,19 +22,27 @@
     "html": false
   },
   "attributes": {
+    "tablistLabel": {
+      "type": "string",
+      "default": "Tabs"
+    },
     "tab1Image": {
       "type": "integer"
     },
     "tab1ImageUrl": {
       "type": "string"
     },
+    "tab1ImageAlt": {
+      "type": "string",
+      "default": ""
+    },
     "tab1Title": {
       "type": "string",
-      "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      "default": "Mountain Chapel"
     },
     "tab1Description": {
       "type": "string",
-      "default": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries."
+      "default": "A small white alpine chapel with a steeply pitched roof sits in a green meadow beneath the rugged peaks of the Dolomites."
     },
     "tab1Link": {
       "type": "string",
@@ -46,13 +54,17 @@
     "tab2ImageUrl": {
       "type": "string"
     },
+    "tab2ImageAlt": {
+      "type": "string",
+      "default": ""
+    },
     "tab2Title": {
       "type": "string",
-      "default": "There are many variations of passages of Lorem Ipsum available."
+      "default": "Lakeside Trail"
     },
     "tab2Description": {
       "type": "string",
-      "default": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages."
+      "default": "Two bicycles lean against each other on a gravel path beside a quiet river. Tall trees line the bank, and soft evening light filters through the leaves."
     },
     "tab2Link": {
       "type": "string",

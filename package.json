@@ -1,6 +1,6 @@
 {
 	"name": "custom-tab-block",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "A custom Gutenberg block that displays tabbed content with image backgrounds and accessible keyboard navigation.",
 	"author": "Mainul Hassan",
 	"license": "GPL-2.0-or-later",

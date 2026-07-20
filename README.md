@@ -17,7 +17,8 @@ A custom Gutenberg block for WordPress that displays tabbed content with image-b
 - ♿ **Accessible by default** — implements the [WAI-ARIA Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) with `role="tablist"`, `role="tab"`, and `role="tabpanel"`.
 - ⌨️ **Keyboard navigation** — move between tabs with `←` / `→`, jump to first/last with `Home` / `End`.
 - 🧩 **Sidebar editing** — each tab's image, title, description, and link are set in the block's Inspector sidebar.
-- 🌐 **Translation ready** — all strings are wrapped with `@wordpress/i18n`.
+- 🌐 **Translation ready** — all strings are wrapped with `@wordpress/i18n`, with a `.pot` template included.
+- ↔️ **RTL ready** — built with CSS logical properties, and the tab arrow keys mirror in right-to-left languages.
 - 📐 **Alignment & spacing** — supports `wide`/`full` alignment and vertical margin controls.
 - 🚀 **No third-party dependencies** — built entirely on WordPress core packages.
 
@@ -25,10 +26,10 @@ A custom Gutenberg block for WordPress that displays tabbed content with image-b
 
 The block is built with the [`@wordpress/scripts`](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/) toolchain and the WordPress Block API v3:
 
-- `src/tabs.js` — the shared BEM markup, rendered by both the editor preview and the saved output (a single source of truth).
-- `src/edit.js` — the editor UI: Inspector controls for each tab's image, title, description, and link.
+- `src/tabs.js` — the shared BEM markup, rendered by both the editor preview and the saved output (a single source of truth). Each tab renders a real `<img>` with `wp-image-{id}` and the `hidden` attribute is used to hide inactive panels.
+- `src/edit.js` — the editor UI: Inspector controls for the **Tab Group** label, plus a panel per tab with image, alt text, title, description, and link.
 - `src/save.js` — the block's static markup saved to post content.
-- `src/view.js` — a lightweight, dependency-free `TabsAutomatic` class that assigns the ARIA roles/ids and wires up click + keyboard interaction on the front end.
+- `src/view.js` — a lightweight, dependency-free `TabsAutomatic` class that assigns per-instance unique IDs, ARIA roles, and wires up click + keyboard interaction on the front end (including `tab.focus( { preventScroll: true } )` so activation does not scroll the page).
 - `src/block.json` — block metadata, attributes, supports, and asset registration.
 
 ## Installation
@@ -65,11 +66,12 @@ npm run plugin-zip # Create a distributable plugin .zip
 ## Usage
 
 1. Add the **Custom Tab Block** from the block inserter.
-2. Open the block settings sidebar and fill in the **Tab 1 Data** and **Tab 2 Data** panels:
-   - **Image** — the background image shown on the tab trigger.
+2. Open the block settings sidebar and fill in the **Tab Group** label (used by screen readers to describe the group of tabs) and the **Tab 1 Data** / **Tab 2 Data** panels:
+   - **Image** — selected from the media library; shown on the tab trigger.
+   - **Image alt text** — describe the image for screen readers, or leave empty if decorative.
    - **Title** — the bold heading inside the tab panel.
    - **Description** — the body copy.
-   - **Link** — the destination for the "Read More" button.
+   - **Link** — the destination for the "Read More" button (leave empty to hide the button).
 3. On the front end, visitors switch tabs by clicking a tab or using the keyboard.
 
 ## Accessibility
@@ -83,7 +85,9 @@ The block follows the WAI-ARIA Authoring Practices for tabs:
 | `Home`         | Move to the first tab         |
 | `End`          | Move to the last tab          |
 
-Only the active tab is in the tab order; arrow keys move focus between tabs, and the matching panel is revealed automatically.
+Only the active tab is in the tab order within the tablist. Pressing Tab moves focus to the active panel (which is itself in the page tab sequence, per the [WAI-ARIA APG Tabs Keyboard Interaction notes](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/#keyboardinteraction)), then to any focusable children inside it — for example, the "Read More" link. Arrow keys move focus between tabs, and the matching panel is revealed automatically.
+
+Each tab trigger carries an `aria-label` of `Tab N: <title>` so screen readers announce position and content together. The `<img>` inside each tab trigger uses the alt text supplied from the media library (or `alt=""` if marked decorative).
 
 ## Requirements
 

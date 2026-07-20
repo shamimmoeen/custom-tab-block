@@ -1,0 +1,135 @@
+# Copyright (C) 2026 Mainul Hassan
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Tab Block 0.3.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-tab-block\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-20T11:53:07+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: custom-tab-block\n"
+
+#. Plugin Name of the plugin
+#: custom-tab-block.php
+msgid "Custom Tab Block"
+msgstr ""
+
+#. Description of the plugin
+#: custom-tab-block.php
+msgid "A custom Gutenberg block that displays tabbed content with image backgrounds, accessible keyboard navigation, and ARIA support."
+msgstr ""
+
+#. Author of the plugin
+#: custom-tab-block.php
+msgid "Mainul Hassan"
+msgstr ""
+
+#. translators: 1: tab number, 2: tab title
+#: build/index.js:2
+#: src/tabs.js:48
+#, js-format
+msgid "Tab %1$d: %2$s"
+msgstr ""
+
+#. translators: %d: tab number
+#: build/index.js:3
+#: src/tabs.js:57
+#, js-format
+msgid "Tab %d"
+msgstr ""
+
+#. translators: %s: the tab title.
+#: build/index.js:4
+#: src/tabs.js:106
+#, js-format
+msgid "Read More about %s"
+msgstr ""
+
+#: build/index.js:4
+#: src/tabs.js:115
+msgid "Read More"
+msgstr ""
+
+#: build/index.js:4
+#: src/edit.js:37
+msgid "Tab Group"
+msgstr ""
+
+#: build/index.js:4
+#: src/edit.js:41
+msgid "Group label"
+msgstr ""
+
+#: build/index.js:4
+#: src/edit.js:42
+msgid "Used by screen readers to describe this group of tabs."
+msgstr ""
+
+#. translators: %d: the tab number.
+#: build/index.js:5
+#: src/edit.js:66
+#, js-format
+msgid "Tab %d Data"
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:74
+msgid "Image"
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:86
+msgid "Replace image"
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:102
+msgid "Select image"
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:118
+msgid "Remove"
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:129
+msgid "Image alt text (decorative if empty)"
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:139
+msgid "Describe the image for screen readers, or leave empty if decorative."
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:148
+msgid "Title"
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:157
+msgid "Description"
+msgstr ""
+
+#: build/index.js:5
+#: src/edit.js:171
+msgid "Link"
+msgstr ""
+
+#: build/block.json
+#: src/block.json
+msgctxt "block title"
+msgid "Custom Tab Block"
+msgstr ""
+
+#: build/block.json
+#: src/block.json
+msgctxt "block description"
+msgid "Accessible tabbed content with image-backed tabs."
+msgstr ""
