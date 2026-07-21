@@ -49,6 +49,7 @@ Yes. Each tab trigger can use an image selected from the WordPress media library
 * Tab content uses a run-in heading style with an em-dash separator (kept out of the accessible labels).
 * Tab buttons render a real `<img>` instead of a CSS background so the media library can supply alt text and WordPress can add responsive `srcset`, lazy loading, and LCP-aware `fetchpriority`.
 * Tab `aria-label` is now "Tab N: <title>" for clearer screen reader output.
+* The decorative 01/02 tab number is hidden from assistive technology with `aria-hidden`.
 * Per-tab image alt text field, and a top-level "Tab Group" label for the `aria-label` on the tablist.
 * "Read More" link is only rendered when a destination URL is set.
 * Inactive panels are hidden via the `hidden` HTML attribute (no `display: none` class) so screen readers and the browser tab order both skip them.

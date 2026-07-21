@@ -71,9 +71,10 @@ export default function Tabs( { attributes } ) {
 								}
 							/>
 						) }
-						<span className="custom-tab-block__tab-number">{ `0${
-							i + 1
-						}` }</span>
+						<span
+							className="custom-tab-block__tab-number"
+							aria-hidden="true"
+						>{ `0${ i + 1 }` }</span>
 					</button>
 				) ) }
 			</div>
